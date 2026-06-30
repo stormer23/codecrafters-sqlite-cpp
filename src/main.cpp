@@ -34,7 +34,15 @@ int main(int argc, char* argv[]) {
         unsigned short page_size = (static_cast<unsigned char>(buffer[1]) | (static_cast<unsigned char>(buffer[0]) << 8));
         
         std::cout << "database page size: " << page_size << std::endl;
-    }
+        database_file.seekg(103);
+        database_file.read(buffer, 2);
 
+        unsigned short num_of_tables =
+            (static_cast<unsigned char>(buffer[1]) |
+            (static_cast<unsigned char>(buffer[0]) << 8));
+
+        std::cout << "number of tables: " << num_of_tables << std::endl;
+        
+    }
     return 0;
 }
